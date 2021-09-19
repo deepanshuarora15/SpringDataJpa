@@ -1,0 +1,8 @@
+1. JDBC is the API provided by Java to connect to databases.
+2. Problem: Java works on the concept of classes and objects. But database works in terms of tables?
+3. Mapping these two is an issue in itself. Earlier we used to do inter-conversion.
+4. Solution : Hibernate, IBatis and some other frameworks. But the problem here is that if you ever feel like shifting from one
+   framework to another, a lot of code change is required which might break our - otherwise application.
+5. Another better solution : Java now provides Java Persistence API or JPA Api, which is followed by the above mentioned ORM providers.
+6. Remember that JPA is just a specification. hence you as a software engineer still need to use the underlying ORM such as Hibernate.
+   The relief is that with the introduction of JPA, the shifting from one framework to another has become relatively simpler.

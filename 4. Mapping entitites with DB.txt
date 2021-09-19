@@ -1,0 +1,35 @@
+1. Student.java
+
+package com.dailycodebuffer.Jpa.entity;
+
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+@Data
+@NoArgsConstructor
+@ToString
+@AllArgsConstructor
+@Builder
+public class Student {
+    @Id
+    private Long studentId;
+    private String firstName;
+    private String lastName;
+    private String emailId;
+    private String guardianName;
+    private String guardianEmail;
+    private String guardianMobile;
+}
+
+
+2. In MySQL WorkBench;
+
+use schooldb;
+
+select * from student;
+
+3. CamelCasing is converted to underscores
+   Eg: firstName in java would get converted to first_name in MySQL

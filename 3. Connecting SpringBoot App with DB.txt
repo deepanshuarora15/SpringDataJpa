@@ -1,0 +1,23 @@
+1. Dependencies to create SB project:
+   a. Web
+   b. MySql Driver
+   c. Lombok
+   d. Spring Data JPA
+
+2. Inside the mysql workbench:
+   create database schooldb;
+
+3. Application.properties configuration to connect to MySQL:
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/schooldb
+spring.datasource.username=root
+spring.datasource.password=admin
+spring.datasource.driver-class-name =com.mysql.jdbc.Driver
+spring.jpa.show-sql= true
+
+4. Imp: the code in application.properties
+spring.jpa.hibernate.ddl-auto=update
+
+is a little dangerous as any changes you make to your Entity like adding attributes, will directly affect your database.
+In production, we generaly have a deciated team to perform DB operations, so this command should be avoided.
