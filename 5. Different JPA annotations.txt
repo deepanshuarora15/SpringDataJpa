@@ -1,7 +1,7 @@
 1. In production, we won't be doing like we did in previous notes slide. We won't be creating the entity and then create a table in DB 
    out of that. Instead, the table with all the constraints would already be existing within the DB, thanks to the DB team.
    We as Java developers, need to instead use an Entity corresponding to that table, respecting all the constraints.
-2. To solve this issue, we would be adding annotations for table anme and column name in our Entity class.
+2. To solve this issue, we would be adding annotations for table name and column name in our Entity class.
    Eg: @Table(name = "TBL_STUDENT")
 	public class Student {
 
@@ -10,7 +10,7 @@
 
 3.
 
- @Id
+    @Id
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",

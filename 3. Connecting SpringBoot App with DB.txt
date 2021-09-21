@@ -20,4 +20,4 @@ spring.jpa.show-sql= true
 spring.jpa.hibernate.ddl-auto=update
 
 is a little dangerous as any changes you make to your Entity like adding attributes, will directly affect your database.
-In production, we generaly have a deciated team to perform DB operations, so this command should be avoided.
+In production, we generaly have a dedicated team to perform DB operations, so this command should be avoided.

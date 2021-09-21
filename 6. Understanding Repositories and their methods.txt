@@ -1,0 +1,40 @@
+1. create a repository package
+2. interface repository extends JpaRepository<Student, Long> {}
+3. As soon as we create the JpaRepsoitory, press Alt+Enter and create a corresponding Test class. 
+   To this test class, add the annotation @DataJpaTest if you want to create temporary data for testing and then dump it off.
+   But here we would rather use @SpringBootTest, as we don't care about data being saved or dumped off.
+
+4. StudentRepositoryTest.java
+
+package com.dailycodebuffer.Jpa.repository;
+
+import com.dailycodebuffer.Jpa.entity.Student;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class StudentRepositoryTest {
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Test
+    public void saveStudent(){
+        Student student = Student.builder().emailId("gemaini@gmail.com").firstName("Libra")
+                .lastName("Taurus").guardianName("Scorpio")
+                .guardianEmail("Sagittarius").guardianMobile("9999888877").build();
+        studentRepository.save(student);
+    }
+
+    @Test
+    public void printAllStudents(){
+        List<Student> allStudents = studentRepository.findAll();
+        for(Student c: allStudents){
+            System.out.println(c);
+        }
+    }
+}

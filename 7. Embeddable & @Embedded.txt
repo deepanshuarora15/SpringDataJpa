@@ -1,0 +1,142 @@
+1. Issue: we do not want Student class and Guardian class to be separate tables in DB, but we want them to be separate classes in Java.
+2. As of now, we have the Guardian class attributes inside the Student class only. We need to take care of this.
+3. So we form a new class Guardian and provide all the necessary attributes.
+4. But we add @Entity annotation to guardian class, it would go and create a new database table inside the mysql DB. We do not wanna
+   do that and hence we avoid this annotation. We use @Embeddable notation instead
+5. Parent child relationships are generally built using this approach of @Embeddable and @Embdedded.
+6. Guardian.java
+
+package com.dailycodebuffer.Jpa.entity;
+
+import lombok.*;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+@Data
+@AllArgsConstructor
+@ToString
+@NoArgsConstructor
+@Builder
+
+@AttributeOverrides({
+        @AttributeOverride(
+                name = "name",
+                column = @Column(name = "guardian_name")
+        ),
+        @AttributeOverride(
+                name = "email",
+                column = @Column(name = "guardian_email")
+        ),
+        @AttributeOverride(
+                name = "mobile",
+                column = @Column(name = "guardian_mobile")
+        )
+}
+)
+public class Guardian {
+    private String name;
+    private String email;
+    private String mobile;
+}
+
+
+7. Student.java
+
+package com.dailycodebuffer.Jpa.entity;
+
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@NoArgsConstructor
+@ToString
+@AllArgsConstructor
+@Builder
+
+@Table(name = "TBL_STUDENT", uniqueConstraints = @UniqueConstraint(
+        name = "emailId_unique",
+        columnNames = {"email_address"}
+        ))
+public class Student {
+
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+        generator = "student_sequence"
+    )
+    private Long studentId;
+    private String firstName;
+    private String lastName;
+
+    @Column(name = "email_address", nullable = false)
+    private String emailId;
+    @Embedded
+    private Guardian guardian;
+}
+
+
+8. StudentRepositoryTest.java
+
+package com.dailycodebuffer.Jpa.repository;
+
+import com.dailycodebuffer.Jpa.entity.Guardian;
+import com.dailycodebuffer.Jpa.entity.Student;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class StudentRepositoryTest {
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Test
+    public void saveStudent(){
+        Student student = Student.builder().emailId("gemaini@gmail.com").firstName("Libra")
+                .lastName("Taurus")
+//                .guardianName("Scorpio")
+//                .guardianEmail("Sagittarius")
+//                .guardianMobile("9999888877")
+                .build();
+        studentRepository.save(student);
+    }
+
+    @Test
+    public void saveStudentWithGuardian(){
+
+        Guardian guardian = Guardian.builder()
+                .name("Scorpio")
+                .email("Sagittarius")
+                .mobile("9999888877")
+                .build();
+        Student student = Student.builder().
+                emailId("baingan@gmail.com")
+                .firstName("Libra")
+                .lastName("Taurus")
+                .guardian(guardian)
+                .build();
+        studentRepository.save(student);
+    }
+
+    @Test
+    public void printAllStudents(){
+        List<Student> allStudents = studentRepository.findAll();
+        for(Student c: allStudents){
+            System.out.println(c);
+        }
+    }
+}
