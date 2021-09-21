@@ -50,4 +50,26 @@ class StudentRepositoryTest {
             System.out.println(c);
         }
     }
+
+    @Test
+    public void getStudentByName(){
+        System.out.println(studentRepository.findStudentByFirstName("Libra"));
+    }
+
+    @Test
+    public void getStudentByNameContaining(){
+        System.out.println(studentRepository.findStudentByFirstNameContaining("ibr"));
+    }
+
+    @Test
+    public void findStudentByLastNameNotNull(){
+        System.out.println(studentRepository.findStudentByLastNameNotNull());
+    }
+
+    @Test
+    public void findStudentByGuardianName(){
+        System.out.println(studentRepository.findStudentByGuardianName("Scorpio"));
+    }
+
+
 }
