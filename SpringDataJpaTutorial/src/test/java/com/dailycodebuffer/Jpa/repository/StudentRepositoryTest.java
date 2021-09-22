@@ -5,6 +5,8 @@ import com.dailycodebuffer.Jpa.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -71,5 +73,25 @@ class StudentRepositoryTest {
         System.out.println(studentRepository.findStudentByGuardianName("Scorpio"));
     }
 
+
+//    public void getStudentsByEmailAddress(){
+//        System.out.println(studentRepository.getStudentsByEmailAddress("gemini@gmail.com"));
+//    }
+
+
+    @Test
+    public void getStudentByEmailAddressNative(){
+      System.out.println(studentRepository.getStudentByEmailAddressNative("gemini@gmail.com"));
+    }
+
+    @Test
+    public void getStudentByGuardianPhone(){
+        System.out.println(studentRepository.getStudentByGuardianPhone("9999888877"));
+    }
+
+    @Test
+    public void updateStudentNameByEmailId(){
+        studentRepository.updateStudentNameByEmailId("Lala" , "gemini@gmail.com");
+    }
 
 }

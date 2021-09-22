@@ -1,0 +1,10 @@
+1. JPQL is not working for us, but is generally written as:
+
+//    @Query("select s from Student where s.emailId=?1")
+//    Student getStudentsByEmailAddress(String emailId);
+
+2. 
+
+//    public void getStudentsByEmailAddress(){
+//        System.out.println(studentRepository.getStudentsByEmailAddress("gemini@gmail.com"));
+//    }

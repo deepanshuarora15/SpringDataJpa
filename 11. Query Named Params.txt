@@ -1,0 +1,11 @@
+1. Parametrized Query:
+
+   @Query(value="select * from tbl_student where guardian_mobile= :guardian_mobile", nativeQuery = true)
+    List<Student> getStudentByGuardianPhone(@Param("guardian_mobile") String guardian_mobile);
+
+2. 
+
+@Test
+    public void getStudentByGuardianPhone(){
+        System.out.println(studentRepository.getStudentByGuardianPhone("9999888877"));
+    }

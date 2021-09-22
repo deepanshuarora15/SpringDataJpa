@@ -1,0 +1,12 @@
+1.
+
+//Native Query
+    @Query(value="select * from tbl_student where email_address=?1", nativeQuery = true)
+    Student getStudentByEmailAddressNative(String emailId);
+
+2. 
+
+@Test
+    public void getStudentByEmailAddressNative(){
+      System.out.println(studentRepository.getStudentByEmailAddressNative("gemini@gmail.com"));
+    }

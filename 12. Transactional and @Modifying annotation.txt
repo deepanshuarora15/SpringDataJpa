@@ -1,0 +1,16 @@
+1. Till now we have seen:
+   a. @Entity : DDL
+   b. Get : select statements from repo interface
+
+2. Now we have DML statements. To update the database using native queries: We need to use some more annotations like
+   @Modifying and @Transactional
+
+ @Modifying
+    @Transactional
+    @Query(value = "update tbl_student set first_name= :firstName where email_address = :emailId", nativeQuery = true)
+    int updateStudentNameByEmailId(@Param("firstName") String firstName, @Param("emailId") String emailId);
+
+@Test
+    public void updateStudentNameByEmailId(){
+        studentRepository.updateStudentNameByEmailId("Lala" , "gemini@gmail.com");
+    } 
